@@ -125,16 +125,7 @@ body.dark {
   transform: scale(1.05) translateY(-2px); /* Scale up and slightly lift on hover */
   background: linear-gradient(90deg, rgba(0, 162, 255, 0.8), rgba(0, 162, 255, 1)); /* Change gradient on hover */
 }
-/* SideNavBar.css */
 
-/* SideNavBar.css */
-
-/* SideNavbar.css */
-
-/* SideNavbar.css */
-
-/* General styling for the fixed navbar */
-/* SideNavbar.css */
 
 /* General styling for the fixed navbar */
 .sidenavbar {
@@ -202,8 +193,8 @@ body.dark {
 
 /* Base styles for the tilt effect */
 .tilt {
-  display: inline-block; /* Ensure the element behaves properly with transformations */
-  transition: transform 0.2s ease-in-out; /* Smooth transition for hover effect */
+  display: inline-block; 
+  transition: transform 0.2s ease-in-out; 
 }
 
 /* Keyframes for tilt effect on tap */
@@ -221,33 +212,30 @@ body.dark {
 
 /* Apply tilt animation on tap */
 .tilt:active {
-  animation: tilt 0.2s forwards; /* Play the tilt animation when active */
+  animation: tilt 0.2s forwards; 
 }
 /* Navbar styles for responsiveness */
 
-/* Ensure the navbar links are hidden on small screens */
-/* Navbar styles for responsiveness */
 
-/* Ensure the navbar links are hidden on small screens */
 @media (max-width: 768px) {
   .md\\:flex {
     display: none; /* Hide on small screens */
   }
 
   .absolute {
-    position: absolute; /* Make the menu absolute for dropdown */
-    top: 100%; /* Position it below the navbar */
-    left: 0; /* Align to the left */
-    background: white; /* Background for dropdown */
-    z-index: 50; /* Ensure it is above other content */
-    border: 1px solid #eaeaea; /* Optional border */
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Optional shadow */
+    position: absolute; 
+    top: 100%; 
+    left: 0; 
+    background: white; 
+    z-index: 50; 
+    border: 1px solid #eaeaea; 
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); 
   }
 
   .flex-col {
-    flex-direction: column; /* Stack items vertically */
-    width: 100%; /* Full width for the dropdown */
-    align-items: center; /* Center items */
+    flex-direction: column; 
+    width: 100%; 
+    align-items: center;
   }
 
   .md\\:static {
