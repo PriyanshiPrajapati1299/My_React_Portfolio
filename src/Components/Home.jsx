@@ -1,153 +1,112 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import AOS from 'aos'; // Import AOS
 import 'aos/dist/aos.css'; // Import AOS styles
 import { useTheme } from '../assets/Additionals/ThemeContext'; // Use theme context
-import me from '../Images/me.jpeg'; // Replace with your image path
-import { FaHtml5, FaCss3Alt, FaReact, FaFigma } from 'react-icons/fa'; // Import icons
-import { SiMicrosoftword, SiMicrosoftpowerpoint, SiMicrosoftexcel, SiPowerbi } from 'react-icons/si'; // Import other icons
-import CV from '../Images/Priyanshi_Prajapati_CV.pdf';
 
-const HomePage = () => {
+const ProjectsPage = () => {
   const { darkMode } = useTheme(); // Get dark mode from theme context
-  const jobTitles = [
-    { title: 'Graphic Designer', lightColor: 'text-red-600', darkColor: 'text-red-300' },
-    { title: 'Frontend Developer', lightColor: 'text-green-600', darkColor: 'text-green-300' },
-    { title: 'Web Developer', lightColor: 'text-blue-600', darkColor: 'text-blue-300' },
-  ];
-
-  const [currentTitle, setCurrentTitle] = useState('');
-  const [index, setIndex] = useState(0);
-  const typingSpeed = 150; // Speed of typing effect
-  const pauseDuration = 1000; // Pause duration after typing
+  const [hoveredCard, setHoveredCard] = useState(null);
 
   useEffect(() => {
-    AOS.init({ duration: 1200, once: false }); // Initialize AOS with custom duration
+    AOS.init({ duration: 1200, once: false }); // Initialize AOS
   }, []);
 
-  useEffect(() => {
-    let typingTimeout;
-    let pauseTimeout;
+  // Projects data
+  const projects = {
+    fullStack: [
+      { name: '3D eCommerce Website (Upcoming..)', link: '/projects/3d-ecommerce' },
+      { name: 'Food Ordering Website', link: '/projects/food-ordering' },
+    ],
+    frontend: [
+      { name: 'My React Portfolio', link: '/projects/react-portfolio' },
+      { name: 'My Static Portfolio', link: 'https://priyanshiprajapati1299.github.io/My-Portfolio/' },
+    ],
+    graphicDesign: [
+      { name: 'My Designs', link: 'https://github.com/Priyanshi-Graphics' },
+    ],
+    uiUxDesign: [
+      { name: 'My Designs', link: 'https://github.com/Priyanshi-Graphics' },
+    ],
+  };
 
-    const typeTitle = () => {
-      const currentJobTitle = jobTitles[index].title;
-
-      // Typing effect
-      setCurrentTitle((prev) => prev + currentJobTitle.charAt(prev.length));
-
-      if (currentTitle.length < currentJobTitle.length) {
-        typingTimeout = setTimeout(typeTitle, typingSpeed);
-      } else {
-        // Pause after typing
-        pauseTimeout = setTimeout(() => {
-          setCurrentTitle(''); // Clear title for the next one
-          setIndex((prevIndex) => (prevIndex + 1) % jobTitles.length); // Move to the next job title
-        }, pauseDuration);
-      }
-    };
-
-    // Start typing the title if currentTitle is not fully typed
-    if (currentTitle.length < jobTitles[index].title.length) {
-      typeTitle();
-    } else {
-      // If finished typing, wait for pauseDuration to start typing again
-      pauseTimeout = setTimeout(() => {
-        setCurrentTitle(''); // Clear title for the next one
-        setIndex((prevIndex) => (prevIndex + 1) % jobTitles.length);
-      }, pauseDuration);
-    }
-
-    // Cleanup function to clear timeouts
-    return () => {
-      clearTimeout(typingTimeout);
-      clearTimeout(pauseTimeout);
-    };
-  }, [currentTitle, index, jobTitles]);
-
-  useEffect(() => {
-    // Reset currentTitle if the index changes
-    setCurrentTitle('');
-  }, [index]);
-
-  // Set icon background colors based on the theme
-  const iconBackgroundColor = darkMode ? 'bg-white' : 'bg-red-50';
+  const cards = [
+    {
+      title: 'Full Stack Development',
+      category: 'fullStack',
+      color: `${darkMode ? 'bg-gray border-2 border-gray-600' : 'bg-white border-2 border-blue-300'}`,
+      a: 'text-blue-500',
+    },
+    {
+      title: 'Frontend Development',
+      category: 'frontend',
+      color: `${darkMode ? 'bg-gray border-2 border-gray-600' : 'bg-white border-2 border-red-300'}`,
+      a: 'text-red-500',
+    },
+    {
+      title: 'Graphic Designing',
+      category: 'graphicDesign',
+      color: `${darkMode ? 'bg-gray border-2 border-gray-600' : 'bg-white border-2 border-green-300'}`,
+      a: 'text-green-500',
+    },
+    {
+      title: 'UI/UX Design',
+      category: 'uiUxDesign',
+      color: `${darkMode ? 'bg-gray border-2 border-gray-600' : 'bg-white border-2 border-yellow-300'}`,
+      a: 'text-yellow-500',
+    },
+  ];
 
   return (
     <section
-      className={`relative flex flex-col-reverse md:flex-row items-center justify-between h-auto md:h-screen p-6 md:p-10 transition-all duration-500 ${darkMode ? 'bg-gray-900 text-white' : 'bg-white text-black'}`}
-      id='home'
+      className={`p-6 sm:p-8 lg:p-10 transition-all duration-500 ${darkMode ? 'bg-gray-900 text-white' : 'bg-white text-black'}`}
+      id="projects"
     >
-      {/* Image with floating skills for smaller screens (image on top) */}
-      <div 
-        className="w-full md:w-1/3 mt-10 md:mt-0 relative flex justify-center md:order-2"
-        data-aos="fade-left" // Apply AOS animation to the image
+      <h1
+        className="text-3xl sm:text-4xl lg:text-5xl font-bold text-center mb-6 sm:mb-8 lg:mb-10"
+        data-aos="fade-down"
       >
-        <img
-          src={me} // Replace with your image path
-          alt="Priyanshi Prajapati"
-          className={`w-48 md:w-3/4 rounded-full shadow-lg transition-all duration-300 
-            ${darkMode ? 'shadow-blue-500' : 'shadow-pink-500'} 
-            hover:scale-105 hover:shadow-2xl glow-effect bounce-animation`}
-        />
+        My Projects
+      </h1>
 
-        {/* Floating skill icons scattered across the screen */}
-        <div className="absolute w-full h-full hidden md:block">
-          <div className="skill-icon absolute" style={{ top: '5%', left: '5%' }}>
-            <FaHtml5 className={`text-3xl md:text-5xl ${iconBackgroundColor} p-2 rounded-full border-2 border-red-200 shadow-lg text-red-600`} />
-          </div>
-          <div className="skill-icon absolute" style={{ top: '5%', right: '5%' }}>
-            <FaCss3Alt className={`text-3xl md:text-5xl ${iconBackgroundColor} p-2 rounded-full border-2 border-red-200 shadow-lg text-blue-600`} />
-          </div>
-          <div className="skill-icon absolute" style={{ top: '50%', left: '0%' }}>
-            <FaReact className={`text-3xl md:text-5xl ${iconBackgroundColor} p-2 rounded-full border-2 border-red-200 shadow-lg text-cyan-500`} />
-          </div>
-          <div className="skill-icon absolute" style={{ top: '100%', right: '20%' }}>
-            <FaFigma className={`text-3xl md:text-5xl ${iconBackgroundColor} p-2 rounded-full border-2 border-red-200 shadow-lg text-purple-500`} />
-          </div>
-          <div className="skill-icon absolute" style={{ bottom: '0%', left: '10%' }}>
-            <SiMicrosoftword className={`text-3xl md:text-5xl ${iconBackgroundColor} p-2 rounded-full border-2 border-red-200 shadow-lg text-blue-700`} />
-          </div>
-          <div className="skill-icon absolute" style={{ bottom: '20%', right: '5%' }}>
-            <SiMicrosoftpowerpoint className={`text-3xl md:text-5xl ${iconBackgroundColor} p-2 rounded-full border-2 border-red-200 shadow-lg text-orange-600`} />
-          </div>
-          <div className="skill-icon absolute" style={{ bottom: '-15%', left: '40%' }}>
-            <SiMicrosoftexcel className={`text-3xl md:text-5xl ${iconBackgroundColor} p-2 rounded-full border-2 border-red-200 shadow-lg text-green-600`} />
-          </div>
-          <div className="skill-icon absolute" style={{ top: '-10%', right: '50%' }}>
-            <SiPowerbi className={`text-3xl md:text-5xl ${iconBackgroundColor} p-2 rounded-full border-2 border-red-200 shadow-lg text-yellow-600`} />
-          </div>
-        </div>
-      </div>
-
-      <div 
-        className="w-full md:w-1/2 text-center md:text-left md:order-1"
-        data-aos="fade-right" // Apply AOS animation to this div
-      >
-        <h2 className="text-xl md:text-3xl font-normal mb-2">Hello, This is</h2>
-        <h1 className="text-3xl md:text-5xl font-bold">Priyanshi Prajapati</h1>
-        <h2 className="text-xl md:text-3xl mt-3 md:mt-5 font-normal">
-          I'm a 
-          <span 
-            className={`font-semibold transition-transform transform ${currentTitle ? 'scale-110' : ''} 
-              ${darkMode ? jobTitles[index].darkColor : jobTitles[index].lightColor}`}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8">
+        {cards.map((card, index) => (
+          <div
+            key={index}
+            className={`relative p-6 sm:p-8 rounded-lg shadow-lg transition-transform duration-300 transform hover:scale-105 ${darkMode ? 'text-black' : 'text-black'} ${card.color}`}
+            onMouseEnter={() => setHoveredCard(card.category)}
+            onMouseLeave={() => setHoveredCard(null)}
+            data-aos="fade-up"
+            data-aos-offset="200"
+            data-aos-easing="ease-in-out"
           >
-            &nbsp;{currentTitle}
-          </span>
-        </h2>
-        <p className="mt-4 text-sm md:text-base font-normal">
-          A passionate and creative individual skilled in graphic design, front-end development, and web development.
-          I thrive on transforming ideas into visually appealing and user-friendly interfaces, ensuring optimal functionality.
-        </p>
-        <a
-          href={CV} // Replace with your CV link
-          download
-          className="mt-6 inline-block bg-gradient-to-r from-blue-400 to-blue-600 text-white py-2 px-4 md:py-2 md:px-6 rounded-lg shadow-lg transition-transform transform hover:scale-110 hover:shadow-xl active:scale-95 tilt"
-          target='_blank'
-        >
-          Download CV
-        </a>
+            <h2 className={`text-2xl sm:text-3xl font-semibold ${darkMode ? 'text-white' : 'text-black'}`}>
+              {card.title}
+            </h2>
+            {hoveredCard === card.category && (
+              <div className="mt-4 space-y-4">
+                {projects[card.category].map((project, idx) => (
+                  <div
+                    key={idx}
+                    className="flex justify-between items-center bg-white dark:bg-gray-800 p-3 sm:p-4 rounded-lg shadow-md hover:shadow-xl transition duration-300"
+                  >
+                    <span className="text-sm sm:text-base">{project.name}</span>
+                    <a
+                      href={project.link}
+                      className={`${card.a} dark:text-blue-300 font-semibold text-sm sm:text-base hover:underline`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      View Project
+                    </a>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        ))}
       </div>
     </section>
   );
 };
 
-export default HomePage;
+export default ProjectsPage;
