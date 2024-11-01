@@ -22,7 +22,7 @@ const ProjectsPage = () => {
       { name: 'My Static Portfolio', link: 'https://priyanshiprajapati1299.github.io/My-Portfolio/' },
     ],
     graphicDesign: [
-      { name: 'My Designs', link: 'https://github.com/Priyanshi-Graphics' },
+      { name: 'My Designs', link: 'https://www.instagram.com/love._graphics/' },
     ],
     uiUxDesign: [
       { name: 'My Designs', link: 'https://github.com/Priyanshi-Graphics' },
