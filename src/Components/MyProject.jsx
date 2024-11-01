@@ -22,7 +22,10 @@ const ProjectsPage = () => {
       { name: 'My Static Portfolio', link: 'https://priyanshiprajapati1299.github.io/My-Portfolio/' },
     ],
     graphicDesign: [
-      { name: 'My Designs', link: 'https://www.instagram.com/love._graphics/' },
+      { name: 'My Designs', link: 'https://github.com/Priyanshi-Graphics' },
+    ],
+    uiUxDesign: [
+      { name: 'My Designs', link: 'https://github.com/Priyanshi-Graphics' },
     ],
   };
 
@@ -45,6 +48,12 @@ const ProjectsPage = () => {
       color: `${darkMode ? 'bg-gray border-2 border-gray-600' : 'bg-white border-2 border-green-300'}`,
       a: 'text-green-500',
     },
+    {
+      title: 'UI/UX Design',
+      category: 'uiUxDesign',
+      color: `${darkMode ? 'bg-gray border-2 border-gray-600' : 'bg-white border-2 border-yellow-300'}`,
+      a: 'text-yellow-500',
+    },
   ];
 
   return (
@@ -59,7 +68,7 @@ const ProjectsPage = () => {
         My Projects
       </h1>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8">
         {cards.map((card, index) => (
           <div
             key={index}
